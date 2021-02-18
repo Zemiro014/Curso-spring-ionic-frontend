@@ -2,18 +2,25 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import { API_CINFIG } from "../../config/api.config";
-import { categoriaDTO } from "../../models/categoria.dto";
+import { CategoriaDTO } from "../../models/categoria.dto";
 
-@Injectable()
+/*
+    O "@Injectable()" permite que essa classe seja um serviço que possa ser injectando  em outras classes
+*/
+@Injectable()  
 export class CategoriaService
 {
-    constructor(public http: HttpClient)
-    {
 
-    }
+    // Constructor que recebe HttpClient
+    constructor(public http: HttpClient) { } 
 
-    findAll() : Observable<categoriaDTO[]>
+    /* 
+        O "findAll" é o método responsável em enviar a requisição GET para o "API back" e retornar uma lista de categorias do tipo "CategoriaDTO" para minha "API front"
+
+        O "Observable" permite fazer uma requisição e aguardar a resposta 
+     */
+    findAll() : Observable<CategoriaDTO[]>
     {
-       return this.http.get<categoriaDTO[]>(`${API_CINFIG.baseUrl}/categorias`);
+       return this.http.get<CategoriaDTO[]>(`${API_CINFIG.baseUrl}/categorias`);
     }
 }
