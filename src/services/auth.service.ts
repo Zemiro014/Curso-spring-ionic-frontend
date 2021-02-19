@@ -11,10 +11,8 @@ export class AuthService
 {
     jwtHelper: JwtHelper = new JwtHelper();
 
-    constructor(public http: HttpClient, public storage: StorageService)
-    {
+    constructor(public http: HttpClient, public storage: StorageService) { }
 
-    }
     authentication(creds : CredenciaisDTO)
     {
         return this.http.post(
@@ -25,7 +23,7 @@ export class AuthService
                 responseType: 'text'
             });
     }
-    
+
     refreshToken()
     {
         return this.http.post(
