@@ -31,6 +31,16 @@ export class HomePage {
     this.menu.swipeEnable(true);
     }
 
+    ionViewDidEnter() // Ação (Evento) que gerencia o cíclo de vida: Enquanto o token estiver em ativo, não será preciso fazer login no sistema. A menos que sejá feito o Logout antes.
+    {
+      this.auth.refreshToken()
+      .subscribe(Response => {
+        this.auth.successfulLogin(Response.headers.get('Authorization'));
+        this.navCtrl.setRoot('CategoriasPage');
+      },
+      error => {});  
+    }
+
   login(){
     this.auth.authentication(this.creds)
     .subscribe(Response => {
